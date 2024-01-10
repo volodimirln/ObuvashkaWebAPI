@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ObuvashkaWebAPI.Models;
 
@@ -30,14 +31,15 @@ public partial class Bag
     public int? Popularity { get; set; }
 
     public int? Num { get; set; }
+    [JsonIgnore]
 
     public virtual Brand Brand { get; set; } = null!;
-
+    [JsonIgnore]
     public virtual Gender Gender { get; set; } = null!;
-
+    [JsonIgnore]
     public virtual Material MaterialInsideNavigation { get; set; } = null!;
-
+    [JsonIgnore]
     public virtual Material MaterialOutsideNavigation { get; set; } = null!;
-
+    [JsonIgnore]
     public virtual ICollection<PictureToBag> PictureToBags { get; } = new List<PictureToBag>();
 }

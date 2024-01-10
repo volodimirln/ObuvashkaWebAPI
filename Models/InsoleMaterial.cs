@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ObuvashkaWebAPI.Models;
 
@@ -13,6 +14,6 @@ public partial class InsoleMaterial
     public string Title { get; set; } = null!;
 
     public string? OzInsoleId4516 { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<Shoe> Shoes { get; } = new List<Shoe>();
 }
