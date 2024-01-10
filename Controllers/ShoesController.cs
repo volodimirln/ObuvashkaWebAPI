@@ -6,6 +6,7 @@ using ObuvashkaWebAPI.Modules;
 using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Hosting;
 using System.Security.AccessControl;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ObuvashkaWebAPI.Controllers
 {
@@ -84,9 +85,11 @@ namespace ObuvashkaWebAPI.Controllers
         }
 
         [HttpPost, DisableRequestSizeLimit, Route("v1/shoes/image")]
+        [Authorize(Roles = "admin")]
         public IActionResult UploadImageProduct(IFormFile file, int productId, bool status) => UploadImageProduct<PictureToProduct>(file, productId, status, _webHostEnvironment);
 
         [HttpDelete, DisableRequestSizeLimit, Route("v1/shoes/image")]
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteImageProduct(int id)
         {
             var data = db.PictureToProducts.FirstOrDefault(p =>p.Id == id);
@@ -132,14 +135,17 @@ namespace ObuvashkaWebAPI.Controllers
 
         [HttpPost]
         [Route("v1/shoes")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddProduct(Shoe data) => AddData(data);
 
         [HttpPut]
         [Route("v1/shoes")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditProducr(Shoe data) => EditData(data.Id, data);
 
         [HttpDelete]
         [Route("v1/shoes/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteProduct(int id) => DeleteData<Shoe>(id);
 
         //!!!
@@ -154,14 +160,17 @@ namespace ObuvashkaWebAPI.Controllers
 
         [HttpPost]
         [Route("v1/shoes/colors")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddColors(Color data) => AddData(data);
 
         [HttpPut]
         [Route("v1/shoes/colors")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditColors(Color data) => EditData(data.Id, data);
 
         [HttpDelete]
         [Route("v1/shoes/colors/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteColor(int id) => DeleteData<Color>(id);
 
         [HttpGet]
@@ -169,12 +178,15 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Tnved>> GetTNVED() => GetData<Tnved>();
         [HttpPost]
         [Route("v1/shoes/tnved")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddTnved(Tnved data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/tnved")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditTnved(Tnved data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/tnved/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteTnved(int id) => DeleteData<Tnved>(id);
         /***/
 
@@ -183,25 +195,33 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<CountryBrand>> GetCountryBrands() => GetData<CountryBrand>();
         [HttpPost]
         [Route("v1/shoes/countries/brands")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddCountryBrands(CountryBrand data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/countries/brands")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditCountryBrands(CountryBrand data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/countries/brands/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteCountryBrands(int id) => DeleteData<CountryBrand>(id);
         /***/
         [HttpGet]
         [Route("v1/shoes/countries")]
         public ActionResult<IEnumerable<Country>> GetCountries() => GetData<Country>();
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [Route("v1/shoes/countries")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddCountries(Country data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/countries")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditCountries(Country data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/countries/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteCountries(int id) => DeleteData<Country>(id);
         /***/
         [HttpGet]
@@ -209,12 +229,15 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Style>> GetStylies() => GetData<Style>();
         [HttpPost]
         [Route("v1/shoes/stylies")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddStylies(Style data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/stylies")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditStylies(Style data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/stylies/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Deletestylies(int id) => DeleteData<Style>(id);
         /***/
         [HttpGet]
@@ -222,12 +245,15 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Outmaterial>> GetOutmaterials() => GetData<Outmaterial>();
         [HttpPost]
         [Route("v1/shoes/outmaterials")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddOutmaterials(Outmaterial data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/outmaterials")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditOutmaterials(Outmaterial data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/outmaterials/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Deleteoutmaterials(int id) => DeleteData<Outmaterial>(id);
         /***/
         [HttpGet]
@@ -235,12 +261,16 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<InsoleMaterial>> GetInsoleMaterial() => GetData<InsoleMaterial>();
         [HttpPost]
         [Route("v1/shoes/insolematerial")]
+        [Authorize(Roles = "admin")]
+
         public ActionResult AddInsolematerial(InsoleMaterial data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/insolematerial")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditInsolematerial(InsoleMaterial data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/insolematerial/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Deleteinsolematerial(int id) => DeleteData<InsoleMaterial>(id);
         /***/
         [HttpGet]
@@ -248,12 +278,15 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Brand>> GetBrands() => GetData<Brand>();
         [HttpPost]
         [Route("v1/shoes/brands")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddBrands(Brand data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/brands")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditBrand(Brand data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/brands/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Deletebrands(int id) => DeleteData<Brand>(id);
         /***/
         [HttpGet]
@@ -261,12 +294,15 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Material>> GetMaterials() => GetData<Material>();
         [HttpPost]
         [Route("v1/shoes/materials")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddMaterials(Material data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/materials")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditMaterials(Material data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/materials/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Deletematerials(int id) => DeleteData<Material>(id);
         /***/
         [HttpGet]
@@ -274,12 +310,15 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Season>> GetSeasons() => GetData<Season>();
         [HttpPost]
         [Route("v1/shoes/seasons")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddSeasons(Season data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/seasons")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditSeasons(Season data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/seasons/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Deleteseasons(int id) => DeleteData<Season>(id);
         /***/
         [HttpGet]
@@ -287,12 +326,16 @@ namespace ObuvashkaWebAPI.Controllers
         public ActionResult<IEnumerable<Size>> GetSize() => GetData<Size>();
         [HttpPost]
         [Route("v1/shoes/size")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddSize(Size data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/size")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditSize(Size data) => EditData(data.Id, data);
         [HttpDelete]
         [Route("v1/shoes/size/{id}")]
+        [Authorize(Roles = "admin")]
+
         public ActionResult Deletesize(int id) => DeleteData<Size>(id);
         /***/
         [HttpGet]

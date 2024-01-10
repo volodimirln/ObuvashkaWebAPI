@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ObuvashkaWebAPI.Models;
@@ -17,9 +18,11 @@ namespace ObuvashkaWebAPI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
         [HttpPost, DisableRequestSizeLimit, Route("v1/accessories/image")]
+        [Authorize(Roles = "admin")]
         public IActionResult UploadImageProduct(IFormFile file, int productId, bool status) => UploadImageProduct<PictureToAccessory>(file, productId, status, _webHostEnvironment);
 
         [HttpDelete, Route("v1/accessories/image")]
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteImageProduct(int id)
         {
             var data = db.PictureToAccessories.FirstOrDefault(p => p.Id == id);
@@ -51,14 +54,17 @@ namespace ObuvashkaWebAPI.Controllers
 
         [HttpPost]
         [Route("v1/accessories")]
+        [Authorize(Roles = "admin")]
         public ActionResult AddProduct(Accessory data) => AddData(data);
 
         [HttpPut]
         [Route("v1/accessories")]
+        [Authorize(Roles = "admin")]
         public ActionResult EditProducr(Accessory data) => EditData(data.Id, data);
 
         [HttpDelete]
         [Route("v1/accessories/{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteProduct(int id) => DeleteData<Accessory>(id);
         [HttpGet]
         [Route("v1/accessories/images/all")]
