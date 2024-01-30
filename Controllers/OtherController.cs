@@ -23,7 +23,7 @@ namespace ObuvashkaWebAPI.Controllers
             {
                 if (db.Administrarions.Any(p => p.Login == login && p.Password == password))
                 {
-                    var claims = new List<Claim> { new Claim(ClaimTypes.Role, db.Administrarions.FirstOrDefault(p => p.Login == login && p.Password == password).Name) };
+                    var claims = new List<Claim> { new Claim(ClaimTypes.Name, "Golovko Yaraslava") };
                     var jwt = new JwtSecurityToken(
                             issuer: AuthOptions.ISSUER,
                             audience: AuthOptions.AUDIENCE,

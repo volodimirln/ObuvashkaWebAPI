@@ -20,7 +20,6 @@ namespace ObuvashkaWebAPI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-
         [HttpGet]//!!!!!!!!!!!!!!!!
         [Route("v1/shoes")]
         [ProducesResponseType(typeof(Shoe), 200)]
@@ -262,7 +261,6 @@ namespace ObuvashkaWebAPI.Controllers
         [HttpPost]
         [Route("v1/shoes/insolematerial")]
         [Authorize(Roles = "admin")]
-
         public ActionResult AddInsolematerial(InsoleMaterial data) => AddData(data);
         [HttpPut]
         [Route("v1/shoes/insolematerial")]
@@ -338,9 +336,7 @@ namespace ObuvashkaWebAPI.Controllers
 
         public ActionResult Deletesize(int id) => DeleteData<Size>(id);
         /***/
-        [HttpGet]
-        [Route("v1/shoes/vendorcode")]
-        [ProducesResponseType(typeof(IEnumerable<Shoe>), 200)]
+        [HttpGet("v1/shoes/vendorcode"), ProducesResponseType(typeof(IEnumerable<Shoe>), 200)]
         public ActionResult GetVendorCodeProduct(string vendorCode) =>  GetDataRequest(db.Shoes.Where(p => p.VendorCode == vendorCode));
         [HttpGet]
         [Route("v1/shoes/images/color")]
